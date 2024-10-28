@@ -18,7 +18,7 @@ import { FreeMode, Pagination } from "swiper/modules";
 export default function App() {
   return (
     <>
-      <div className="w-full min-h-[50vh] w-[95%] m-auto">
+      <div className="w-full md:min-h-[50vh] min-h-[30vh] w-[95%] m-auto">
         <h1 className="text-4xl font-heading text-center mb-8">
           Our Collections
         </h1>

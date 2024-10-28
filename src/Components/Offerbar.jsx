@@ -17,11 +17,11 @@ import { EffectCoverflow, Pagination } from "swiper/modules";
 const Offerbar = () => {
   return (
     <div>
-      <div className="min-h-[70vh] flex flex-col items-center justify-center">
+      <div className="md:min-h-[70vh] min-h-[30vh] flex flex-col items-center justify-center">
         <h1 className="text-6xl font-heading  p-10">super Offer</h1>
         <div className="w-[80%] min-h-[250px] bg-secondary rounded-md flex items-center justify-center">
           <div className="flex flex-col items-center justify-center w-[50%] ">
-            <h1 className="text-6xl font-heading">New Collection</h1>
+            <h1 className="md:text-6xl text-4xl font-heading">New Collection</h1>
           </div>
           <div className="flex flex-col items-center justify-center w-[50%] relative">
             <img src={OFF} className="absolute drop-shadow-2xl" alt="" />

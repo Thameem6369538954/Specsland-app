@@ -17,7 +17,7 @@ const Navbar = () => {
             <h1>Phn : 6369538953</h1>
           </div>
           <div className="">
-            <ul className="flex items-center justify-between gap-4 hidden md:flex lg:flex font-roboto text-lg">
+            <ul className="flex items-center justify-between gap-4 hidden md:flex lg:flex font-roboto text-xl">
               <li>Home</li>
               <li>Categories</li>
               <li>Products</li>
