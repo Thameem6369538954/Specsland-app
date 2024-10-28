@@ -1,0 +1,11 @@
+/* Add this in a CSS file or within a <style> tag if using inline styles */
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: gray; /* Replace with your desired color */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: gray; /* Replace with hover color */
+}

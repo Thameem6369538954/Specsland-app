@@ -1,0 +1,15 @@
+@font-face{
+    font-family: 'Roboto';
+    src: url('./Fonts/GeosansLight.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  
+}
+@font-face{
+    font-family: 'GeosansLight';
+    src: url('./Fonts/Monkeys.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
