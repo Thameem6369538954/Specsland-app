@@ -5,6 +5,7 @@ import Products from '../Components/Products'
 import Offerbar from '../Components/Offerbar'
 import Reviews from '../Components/Reviews'
 import Topsales from '../Components/Topsales'
+import Form from '../Components/form'
 const Home = () => {
   return (
     <div>
@@ -14,6 +15,7 @@ const Home = () => {
         <Topsales />
         <Offerbar />  
         <Reviews />
+        <Form />
         {/* <Footer /> */}
     </div>
   )

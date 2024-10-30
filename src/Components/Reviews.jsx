@@ -1,14 +1,107 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
+
+
+// import required modules
+import { Pagination } from "swiper/modules";
 
 const Reviews = () => {
+  const [data, setData] = useState([
+    {
+      id: 1,
+      name: "Ahamed",
+      rating: 5,
+      comment: "This product is fantastic! I've been using it for a week now, and I can already see a huge difference.",
+      date: "October 30, 2024",
+    },
+    {
+      id: 2,
+      name: "Ahamed",
+      rating: 5,
+      comment: "This product is fantastic! I've been using it for a week now, and I can already see a huge difference.",
+      date: "October 30, 2024",
+    },
+    {
+      id: 3,
+      name: "Ahamed",
+      rating: 5,
+      comment: "This product is fantastic! I've been using it for a week now, and I can already see a huge difference.",
+      date: "October 30, 2024",
+    },
+    {
+      id: 4,
+      name: "Ahamed",
+      rating: 5,
+      comment: "This product is fantastic! I've been using it for a week now, and I can already see a huge difference.",
+      date: "October 30, 2024",
+    },
+    {
+      id: 5,
+      name: "Ahamed",
+      rating: 5,
+      comment: "This product is fantastic! I've been using it for a week now, and I can already see a huge difference.",
+      date: "October 30, 2024",
+    },
+    
+
+
+  ]);
   return (
     <div className="min-h-[50vh] w-[90%] m-auto">
-      <div className="lg:grid lg:grid-cols-3  min-h-[250px] gap-4 ">
-        <div className="bg-white shadow-xl rounded-xl border border-black">
-          <div className="bg-white shadow-xl min-h-12 rounded-xl border border-black"></div>
+      <div className="">
+        <div className="">
+          <Swiper
+            slidesPerView={"auto"}
+            spaceBetween={10}
+            pagination={{
+              clickable: false,
+            }}
+            modules={[Pagination]}
+            className="mySwiper"
+          >
+            {data.map((items) => {
+              return (
+                <SwiperSlide>
+
+                <div class="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-8">
+                  <div class="flex items-center p-4">
+                    <img
+                      class="w-12 h-12 rounded-full"
+                      src="https://via.placeholder.com/150"
+                      alt="User Avatar"
+                    />
+                    <div class="ml-4">
+                      <h2 class="text-lg font-semibold">{items.name}</h2>
+                      <div class="flex items-center">
+                        <span class="text-yellow-500 mr-1">&#9733;</span>
+                        <span class="text-yellow-500 mr-1">&#9733;</span>
+                        <span class="text-yellow-500 mr-1">&#9733;</span>
+                        <span class="text-yellow-500 mr-1">&#9733;</span>
+                        <span class="text-gray-400">&#9733;</span>
+                        <span class="text-sm text-gray-500 ml-2">
+                          {items.rating}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-4">
+                    <p class="text-gray-700">{items.comment}</p>
+                  </div>
+                  <div class="flex justify-end p-4 border-t">
+                    <span class="text-sm text-gray-500">{items.date}</span>
+                  </div>
+                </div>
+                </SwiperSlide>
+              );
+            })}
+            
+          </Swiper>
         </div>
-        <div className="bg-white shadow-xl rounded-xl border border-black"></div>
-        <div className="bg-white shadow-xl rounded-xl border border-black"></div>
       </div>
     </div>
   );

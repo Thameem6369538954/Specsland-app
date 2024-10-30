@@ -28,7 +28,7 @@ export default () => {
       >
         <SwiperSlide>
           <div
-            className="min-h-[20vh] lg:min-h-[60vh] flex items-center justify-center"
+            className="min-h-[30vh] lg:min-h-[60vh] flex items-center justify-center"
             style={{
               backgroundImage: `url(${BannerA})`,
               backgroundRepeat: "no-repeat",
@@ -57,7 +57,7 @@ export default () => {
         {/* Additional slides */}
         <SwiperSlide>
           <div
-            className="min-h-[20vh] lg:min-h-[60vh] flex items-center justify-center"
+            className="min-h-[30vh] lg:min-h-[60vh] flex items-center justify-center"
             style={{
               backgroundImage: `url(${BannerB})`,
               backgroundRepeat: "no-repeat",
