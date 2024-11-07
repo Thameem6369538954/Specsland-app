@@ -13,16 +13,20 @@ const Navbar = () => {
     setOpen(!open);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+
+  }
+
   return (
     <div className="sticky top-0 z-50">
       <div>
         <nav className="min-h-[10vh] bg-white shadow-md rounded-s flex items-center justify-around px-4">
           <NavLink to="/">
-          <div className="flex items-center gap-4">
-            <img src={LogoSL} className="w-[15%]" alt="Logo" />
-            <h1>Phn : 6369538953</h1>
-
-          </div>
+            <div className="flex items-center gap-4">
+              <img src={LogoSL} className="w-[15%]" alt="Logo" />
+              <h1>Phn : 6369538953</h1>
+            </div>
           </NavLink>
           <div className="flex items-center justify-between gap-4 hidden md:flex lg:flex font-roboto text-xl">
             <ul className="flex items-center gap-4">
@@ -65,16 +69,24 @@ const Navbar = () => {
             )}
           </div>
         </nav>
-        <div
-          className={`${
-            open ? "block" : "hidden"
-          } bg-red-300 min-h-[90vh] md:hidden`}
-        >
-          <ul className="flex flex-col items-center justify-between gap-4">
-            <li>Home</li>
-            <li>Categories</li>
-            <li>Products</li>
-            <li>Offers</li>
+        <div className={`${open ? "block" : "hidden"}  min-h-[90vh] md:hidden`}>
+          <ul className="flex flex-col items-center justify-center gap-4 min-h-[90vh]">
+            <Link
+              to="/signup"
+              className="flex items-center gap-4 border border-gray-300 rounded p-2 cursor-pointer"
+            >
+              <FaRegUserCircle className="text-3xl" />
+              <p className="" onClick={handleClose}>
+                Sign up
+              </p>
+            </Link>
+            <div className="flex items-center gap-4 border border-gray-300 rounded p-2 cursor-pointer">
+              <FaOpencart /> <p onClick={handleClose}>cart</p>
+            </div>
+            <li onClick={handleClose} >Home</li>
+            <li onClick={handleClose} >Categories</li>
+            <li onClick={handleClose} >Products</li>
+            <li onClick={handleClose} >Offers</li>
           </ul>
         </div>
       </div>
