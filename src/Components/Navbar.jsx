@@ -70,23 +70,35 @@ const Navbar = () => {
           </div>
         </nav>
         <div className={`${open ? "block" : "hidden"}  min-h-[90vh] md:hidden`}>
-          <ul className="flex flex-col items-center justify-center gap-4 min-h-[90vh]">
-            <Link
-              to="/signup"
-              className="flex items-center gap-4 border border-gray-300 rounded p-2 cursor-pointer"
-            >
-              <FaRegUserCircle className="text-3xl" />
-              <p className="" onClick={handleClose}>
-                Sign up
-              </p>
-            </Link>
-            <div className="flex items-center gap-4 border border-gray-300 rounded p-2 cursor-pointer">
+          <ul className="flex flex-col items-center justify-center gap-10 min-h-[90vh]">
+            <div>
+              {" "}
+              <Link
+                to="/signup"
+                className="flex items-center gap-4 border border-gray-300 rounded p-2 cursor-pointer"
+              >
+                <FaRegUserCircle className="text-3xl" />
+                <p className="" onClick={handleClose}>
+                  Sign up
+                </p>
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-10 border border-gray-300 rounded p-2 cursor-pointer">
               <FaOpencart /> <p onClick={handleClose}>cart</p>
             </div>
-            <li onClick={handleClose} >Home</li>
-            <li onClick={handleClose} >Categories</li>
-            <li onClick={handleClose} >Products</li>
-            <li onClick={handleClose} >Offers</li>
+            <li onClick={handleClose} className="font-roboto text-3xl">
+              Home
+            </li>
+            <li onClick={handleClose} className="font-roboto text-3xl">
+              Categories
+            </li>
+            <li onClick={handleClose} className="font-roboto text-3xl">
+              Products
+            </li>
+            <li onClick={handleClose} className="font-roboto text-3xl">
+              Offers
+            </li>
           </ul>
         </div>
       </div>

@@ -8,5 +8,8 @@ export default defineConfig({
     proxy: {
       "/products": "http://localhost:3000",
     },
+    build: {
+      outDir: "dist", // Default is 'dist' but double-check if you changed it
+    },
   },
 });

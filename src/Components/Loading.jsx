@@ -35,7 +35,7 @@ const Loading = () => {
           <span
             key={index}
             ref={(el) => (lettersRef.current[index] = el)}
-            className="text-secondary lg:text-7xl md:text-5xl text-3xl font-copydesk shadow-md px-4 py-2 rounded-full"
+            className="text-secondary lg:text-7xl md:text-5xl text-[9px] font-copydesk shadow-md px-4 py-2 rounded-full"
           >
             {letter}
           </span>
