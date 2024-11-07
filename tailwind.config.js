@@ -7,6 +7,7 @@ export default {
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
         heading: ["GeosansLight", "sans-serif"],
+        copydesk: ["Smothy Bubble", "sans-serif"],
       },
       colors: {
         primary: "#00f46a",

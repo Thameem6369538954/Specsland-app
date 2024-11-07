@@ -66,36 +66,35 @@ const Reviews = () => {
           >
             {data.map((items) => {
               return (
-                <SwiperSlide>
-
-                <div class="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-8">
-                  <div class="flex items-center p-4">
-                    <img
-                      class="w-12 h-12 rounded-full"
-                      src="https://via.placeholder.com/150"
-                      alt="User Avatar"
-                    />
-                    <div class="ml-4">
-                      <h2 class="text-lg font-semibold">{items.name}</h2>
-                      <div class="flex items-center">
-                        <span class="text-yellow-500 mr-1">&#9733;</span>
-                        <span class="text-yellow-500 mr-1">&#9733;</span>
-                        <span class="text-yellow-500 mr-1">&#9733;</span>
-                        <span class="text-yellow-500 mr-1">&#9733;</span>
-                        <span class="text-gray-400">&#9733;</span>
-                        <span class="text-sm text-gray-500 ml-2">
-                          {items.rating}
-                        </span>
+                <SwiperSlide key={items.id}>
+                  <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-8">
+                    <div className="flex items-center p-4">
+                      <img
+                        className="w-12 h-12 rounded-full"
+                        src="https://via.placeholder.com/150"
+                        alt="User Avatar"
+                      />
+                      <div className="ml-4">
+                        <h2 className="text-lg font-semibold">{items.name}</h2>
+                        <div className="flex items-center">
+                          <span className="text-yellow-500 mr-1">&#9733;</span>
+                          <span className="text-yellow-500 mr-1">&#9733;</span>
+                          <span className="text-yellow-500 mr-1">&#9733;</span>
+                          <span className="text-yellow-500 mr-1">&#9733;</span>
+                          <span className="text-gray-400">&#9733;</span>
+                          <span className="text-sm text-gray-500 ml-2">
+                            {items.rating}
+                          </span>
+                        </div>
                       </div>
                     </div>
+                    <div class="p-4">
+                      <p class="text-gray-700">{items.comment}</p>
+                    </div>
+                    <div class="flex justify-end p-4 border-t">
+                      <span class="text-sm text-gray-500">{items.date}</span>
+                    </div>
                   </div>
-                  <div class="p-4">
-                    <p class="text-gray-700">{items.comment}</p>
-                  </div>
-                  <div class="flex justify-end p-4 border-t">
-                    <span class="text-sm text-gray-500">{items.date}</span>
-                  </div>
-                </div>
                 </SwiperSlide>
               );
             })}
