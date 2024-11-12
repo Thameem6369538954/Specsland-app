@@ -53,18 +53,48 @@ const Signup = () => {
     if (!data.username) {
       errors.username = "Username is required";
     }
-    if (!data.email) {
+    if (formData.email.trim() === "") {
       errors.email = "Email is required";
+      isValid = false;
+    } else if (
+      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(formData.email)
+    ) {
+      errors.email = "Please enter a valid email address";
+      isValid = false;
     }
-    if (!data.password) {
+    if (!formData.password) {
       errors.password = "Password is required";
+      isValid = false;
+    } else if (formData.password.length < 8) {
+      errors.password = "Password must be at least 8 characters";
+      isValid = false;
+    } else if (!/[A-Z]/.test(formData.password)) {
+      errors.password = "Password must contain at least one uppercase letter";
+      isValid = false;
+    } else if (!/[a-z]/.test(formData.password)) {
+      errors.password = "Password must contain at least one lowercase letter";
+      isValid = false;
+    } else if (!/[0-9]/.test(formData.password)) {
+      errors.password = "Password must contain at least one number";
+      isValid = false;
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(formData.password)) {
+      errors.password = "Password must contain at least one special character";
+      isValid = false;
     }
+
     if (!data.confrimPassword) {
       errors.confrimPassword = "Confrim Password is required";
     }
-    if (!data.mobileNumber) {
-      errors.mobileNumber = "Mobile Number is required";
-    }
+   if (formData.mobileNumber.trim() === "") {
+     errors.mobileNumber = "Mobile Number is required";
+     isValid = false;
+   } else if (!/^\d+$/.test(formData.mobileNumber)) {
+     errors.mobileNumber = "Mobile Number must contain only digits";
+     isValid = false;
+   } else if (formData.mobileNumber.length !== 10) {
+     errors.mobileNumber = "Mobile Number must be exactly 10 digits";
+     isValid = false;
+   }
     if (data.password !== data.confrimPassword) {
       errors.confrimPassword = "Passwords do not match";
     }
