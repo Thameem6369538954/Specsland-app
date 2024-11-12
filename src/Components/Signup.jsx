@@ -251,6 +251,28 @@ const validate = () => {
                   )}
                 </div>
 
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="email"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    type="number"
+                    id="mobileNumber"
+                    value={data.mobileNumber}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter your phone number"
+                  />
+                  {errors.mobileNumber && (
+                    <p className="text-red-500 roboto mt-1">
+                      {errors.mobileNumber}
+                    </p>
+                  )}
+                </div>
+
                 <div className="mb-4 relative">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2"
