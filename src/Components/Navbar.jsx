@@ -149,14 +149,26 @@ const Navbar = () => {
             >
               Offers
             </li>
-            <Link to="/signup" className="flex items-center  ">
-              <li
-                onClick={handleClose}
-                className="font-roboto text-3xl hover:bg-black p-6 m-1"
-              >
-                Sign up
-              </li>
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/Userprofile">
+                <p
+                  onClick={handleClose}
+                  className="font-roboto text-3xl hover:bg-black p-6 m-1"
+                >
+                  UserProfile
+                </p>
+              </Link>
+            ) : (
+              <Link to="/signup" className="flex items-center  ">
+                <li
+                  onClick={handleClose}
+                  className="font-roboto text-3xl hover:bg-black p-6 m-1"
+                >
+                  Sign up
+                </li>
+              </Link>
+            )}
+
             <li
               onClick={handleClose}
               className="font-roboto text-3xl hover:bg-black p-6 m-1"

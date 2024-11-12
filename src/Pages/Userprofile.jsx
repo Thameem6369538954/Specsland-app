@@ -157,7 +157,7 @@ const UserProfile = () => {
       {isAuthenticated ? (
         <div className="w-full min-h-[60vh]">
           <div className="flex items-center justify-around">
-            <h1 className="text-4xl font-roboto text-gray-500 m-7">
+            <h1 className="md:text-4xl text-2xl font-roboto text-gray-500 m-7">
               Account Setting
             </h1>
             <div className="md:flex flex-row ">
