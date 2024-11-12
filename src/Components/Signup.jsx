@@ -4,8 +4,21 @@ import Log from "../Images/Log.jpg";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PiSmileyXEyesLight } from "react-icons/pi";
+import { LiaMehRollingEyesSolid } from "react-icons/lia";
 
 const Signup = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const [showConpassword, setShowConpassword] = useState(false);
+
+  const toggleConpasswordVisibility = () => {
+    setShowConpassword(!showConpassword);
+  };
+
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
 
@@ -48,58 +61,67 @@ const Signup = () => {
 
   const [errors, setErrors] = useState({});
 
-  const validate = () => {
-    const errors = {};
-    if (!data.username) {
-      errors.username = "Username is required";
-    }
-    if (formData.email.trim() === "") {
-      errors.email = "Email is required";
-      isValid = false;
-    } else if (
-      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(formData.email)
-    ) {
-      errors.email = "Please enter a valid email address";
-      isValid = false;
-    }
-    if (!formData.password) {
-      errors.password = "Password is required";
-      isValid = false;
-    } else if (formData.password.length < 8) {
-      errors.password = "Password must be at least 8 characters";
-      isValid = false;
-    } else if (!/[A-Z]/.test(formData.password)) {
-      errors.password = "Password must contain at least one uppercase letter";
-      isValid = false;
-    } else if (!/[a-z]/.test(formData.password)) {
-      errors.password = "Password must contain at least one lowercase letter";
-      isValid = false;
-    } else if (!/[0-9]/.test(formData.password)) {
-      errors.password = "Password must contain at least one number";
-      isValid = false;
-    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(formData.password)) {
-      errors.password = "Password must contain at least one special character";
-      isValid = false;
-    }
+const validate = () => {
+  const errors = {};
 
-    if (!data.confrimPassword) {
-      errors.confrimPassword = "Confrim Password is required";
-    }
-   if (formData.mobileNumber.trim() === "") {
-     errors.mobileNumber = "Mobile Number is required";
-     isValid = false;
-   } else if (!/^\d+$/.test(formData.mobileNumber)) {
-     errors.mobileNumber = "Mobile Number must contain only digits";
-     isValid = false;
-   } else if (formData.mobileNumber.length !== 10) {
-     errors.mobileNumber = "Mobile Number must be exactly 10 digits";
-     isValid = false;
+  // Validate Username
+  if (!data.username) {
+    errors.username = "Username is required";
+  } else if (data.username.length < 3) {
+    errors.username = "Username must be at least 3 characters long";
+  }
+
+  // Validate Email
+   if (!data.email) {
+     errors.email = "Email is required";
+   } else if (/[A-Z]/.test(data.email)) {
+     errors.email = "Email must be in lowercase";
+   } else if (
+     !/^[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|net|org|io|edu|gov|mil)$/.test(
+       data.email
+     )
+   ) {
+     errors.email = "Please enter a valid email address";
    }
-    if (data.password !== data.confrimPassword) {
-      errors.confrimPassword = "Passwords do not match";
-    }
-    return errors;
-  };
+
+
+  // Validate Password
+  if (!data.password) {
+    errors.password = "Password is required";
+  } else if (data.password.length < 8) {
+    errors.password = "Password must be at least 8 characters long";
+  } else if (!/[A-Z]/.test(data.password)) {
+    errors.password = "Password must include at least one uppercase letter";
+  } else if (!/[a-z]/.test(data.password)) {
+    errors.password = "Password must include at least one lowercase letter";
+  } else if (!/[0-9]/.test(data.password)) {
+    errors.password = "Password must include at least one number";
+  } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(data.password)) {
+    errors.password =
+      "Password must include at least one special character (e.g., !, @, #)";
+  }
+
+  // Validate Confirm Password
+  if (!data.confrimPassword) {
+    errors.confrimPassword = "Confirm Password is required";
+  } else if (data.password !== data.confrimPassword) {
+    errors.confrimPassword = "Passwords do not match";
+  }
+
+  // Validate Mobile Number
+  if (!data.mobileNumber) {
+    errors.mobileNumber = "Mobile Number is required";
+  } else if (!/^\d+$/.test(data.mobileNumber)) {
+    errors.mobileNumber = "Mobile Number must contain only digits";
+  } else if (data.mobileNumber.length !== 10) {
+    errors.mobileNumber = "Mobile Number must be exactly 10 digits";
+  }
+
+  return errors;
+};
+
+
+
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -229,29 +251,7 @@ const Signup = () => {
                   )}
                 </div>
 
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="email"
-                  >
-                    Phone
-                  </label>
-                  <input
-                    type="number"
-                    id="mobileNumber"
-                    value={data.mobileNumber}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter your phone number"
-                  />
-                  {errors.mobileNumber && (
-                    <p className="text-red-500 roboto mt-1">
-                      {errors.mobileNumber}
-                    </p>
-                  )}
-                </div>
-
-                <div className="mb-4">
+                <div className="mb-4 relative">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2"
                     htmlFor="password"
@@ -259,7 +259,7 @@ const Signup = () => {
                     Password
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"} // Toggle between "text" and "password"
                     name="password"
                     id="password"
                     value={data.password}
@@ -267,6 +267,16 @@ const Signup = () => {
                     className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter your password"
                   />
+                  <span
+                    className="absolute right-3 top-9 cursor-pointer"
+                    onClick={togglePasswordVisibility} // Trigger toggle on click
+                  >
+                    {showPassword ? (
+                      <LiaMehRollingEyesSolid className="text-3xl" /> // Icon when password is visible
+                    ) : (
+                      <PiSmileyXEyesLight className="text-3xl" /> // Icon when password is hidden
+                    )}
+                  </span>
                   {errors.password && (
                     <p className="text-red-500 roboto mt-1">
                       {errors.password}
@@ -274,7 +284,7 @@ const Signup = () => {
                   )}
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-4 relative">
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2"
                     htmlFor="confirm-password"
@@ -282,13 +292,23 @@ const Signup = () => {
                     Confirm Password
                   </label>
                   <input
-                    type="password"
+                    type={showConpassword ? "text" : "password"}
                     id="confrimPassword"
                     value={data.confrimPassword}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Confirm your password"
                   />
+                  <span
+                    className="absolute right-3 top-9 cursor-pointer"
+                    onClick={toggleConpasswordVisibility} // Trigger toggle on click
+                  >
+                    {showConpassword ? (
+                      <LiaMehRollingEyesSolid className="text-3xl" /> // Icon when password is visible
+                    ) : (
+                      <PiSmileyXEyesLight className="text-3xl" /> // Icon when password is hidden
+                    )}
+                  </span>
                   {errors.confrimPassword && (
                     <p className="text-red-500 roboto mt-1">
                       {errors.confrimPassword}
