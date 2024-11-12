@@ -30,12 +30,12 @@ const Loading = () => {
       <div className="absolute inset-0 backdrop-blur-md"></div>
 
       {/* Specsland Animation */}
-      <div className="relative flex items-center ">
+      <div className="relative flex items-center justify-center w-full">
         {letters.map((letter, index) => (
           <span
             key={index}
             ref={(el) => (lettersRef.current[index] = el)}
-            className="text-secondary lg:text-7xl md:text-5xl text-[9px] font-copydesk shadow-md px-4 py-2 rounded-full"
+            className="text-secondary lg:text-3xl md:text-5xl text-[9px] font-copydesk shadow-md px-4 py-2 rounded-full"
           >
             {letter}
           </span>

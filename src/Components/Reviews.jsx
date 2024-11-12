@@ -52,7 +52,7 @@ const Reviews = () => {
 
   ]);
   return (
-    <div className="min-h-[50vh] w-[90%] m-auto">
+    <div className="min-h-[50vh] w-[90%] m-auto font-roboto">
       <div className="">
         <div className="">
           <Swiper
@@ -98,7 +98,6 @@ const Reviews = () => {
                 </SwiperSlide>
               );
             })}
-            
           </Swiper>
         </div>
       </div>

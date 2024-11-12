@@ -1,10 +1,14 @@
 import React,{useState,useRef,useEffect} from 'react'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
 import Log from "../Images/Log.jpg"
 import { gsap } from "gsap";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess } from "../Redux/Slice/authSlice"; 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { user, token, isFetching, error } = useSelector((state) => state.auth); // Get user and token from Redux
   const headingRef = useRef(null);
   const subHeadingRef = useRef(null);
 
@@ -34,47 +38,67 @@ const Login = () => {
       }
     );
   }, []);
-    const dispatch = useDispatch();
-    const [data,setData] = useState({
-      email:"",
-      password:""
-    })
+  // const dispatch = useDispatch();
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
 
-    const handleChange = (e) =>{
-      const {id,value} = e.target;
-      setData({...data,[id]:value})
-    }
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log("Form data to be sent:", data);
-
-      try {
-        const res = await axios.post(
-          "https://specsland-backend.onrender.com/api/v1/login",
-          data, // Sending form data here
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        console.log(res.data,"Response from backend");
-        // console.log(res.token,"Response from backend");
+   useEffect(() => {
+     console.log("Updated Redux State:", user, token); // Log user and token values
+   }, [user, token]);
 
 
-        if (res.data.message === "User Registered successfully") {
-          alert(res.data.message);
-          window.location.href = "/";
-          dispatch({ type: "LOGIN", payload: res.data.user });
-        } else {
-          alert(res.data.message);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setData({ ...data, [id]: value });
+  };
+
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   try {
+     const res = await axios.post(
+       "https://specsland-backend.onrender.com/api/v1/login",
+       data,
+       { headers: { "Content-Type": "application/json" } }
+     );
+
+     console.log("Response from backend:", res); // Log response
+
+     if (res.data.message === "Login successful") {
+       // Save to localStorage
+       localStorage.setItem("token", res.data.token);
+       localStorage.setItem("user", JSON.stringify(res.data.data));
+
+       console.log("Dispatching loginSuccess with:", {
+         user: res.data.data,
+         token: res.data.token,
+       });
+
+       // Dispatch loginSuccess action to update Redux state
+       dispatch(loginSuccess({ user: res.data.data, token: res.data.token }));
+       toast.success(res.data.message);
+
+       setTimeout(() => {
+         window.location.href = "/";
+       }, 3000);
+
+     } else {
+       toast.error(res.data.message);
+     }
+   } catch (error) {
+     toast.error(error.response?.data?.message || "Login failed");
+     dispatch(loginFailure());
+   }
+ };
+
+  
+  // const isAuthenticated = user && token;
+  // console.log("User Data:", user); // Log user data
+  // console.log("Token:", token); // Log token
+  // console.log("Is Authenticated:", isAuthenticated); 
 
   return (
     <div>
@@ -110,7 +134,7 @@ const Login = () => {
               <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="font-roboto">
                   <div className="mb-4">
                     <label
                       className="block text-gray-700 text-sm font-bold mb-2"
@@ -155,9 +179,9 @@ const Login = () => {
                   </div>
                 </form>
 
-                <p className="text-center text-gray-600 mt-6 flex items-center justify-center gap-2">
+                <p className="text-center text-gray-600 mt-6 flex items-center justify-center gap-2 font-roboto">
                   <p>Don't have an account?</p>
-                  <a href="/Signup" className="text-blue-500 hover:underline">
+                  <a href="/Signup" className="text-blue-500 underline">
                     Signup
                   </a>
                 </p>
@@ -166,6 +190,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
