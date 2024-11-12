@@ -256,8 +256,8 @@ const UserProfile = () => {
               </div>
             </div>
           )}
-          <div className="flex items-center justify-center  min-h-[80vh]">
-            <div className="w-[30%]  min-h-[500px]">
+          <div className="flex-row sm:flex items-center justify-center  min-h-[80vh]">
+            <div className="w-full sm:w-[50%] sm:w-[50%] min-h-[500px]">
               <div className="flex flex-col items-center justify-center min-h-[400px] gap-5">
                 <img
                   src={
@@ -278,17 +278,19 @@ const UserProfile = () => {
                 </button>
               </div>
             </div>
-            <div className="w-[70%] min-h-[600px]">
+            <div className="sm:w-[70%] w-full min-h-[600px]">
               {activeSection === "AccountSetting" && (
                 <div className="min-h-[400px]">
-                  <ul className="flex flex-col items-start justify-center gap-3 w-full max-w-2xl min-h-[400px] mx-auto font-roboto">
+                  <ul className="flex flex-col items-start justify-center gap-3 w-full   min-h-[400px] mx-auto font-roboto">
                     <li className="md:flex items-center w-full px-4 py-2">
                       <p className="text-2xl md:text-3xl w-[50%]">Name</p>
-                      <p className="text-2xl md:text-3xl">{user?.username}</p>
+                      <p className="text-2xl md:text-3xl w-[50%]">
+                        {user?.username}
+                      </p>
                     </li>
                     <li className="md:flex items-center w-full px-4 py-2">
                       <p className="text-2xl md:text-3xl w-[50%]">Email</p>
-                      <p className="text-2xl md:text-3xl flex-1 pl-4">
+                      <p className="text-2xl md:text-3xl flex-1 pl-4 w-[50%]">
                         {user?.email}
                       </p>
                     </li>
@@ -296,13 +298,15 @@ const UserProfile = () => {
                       <p className="text-2xl md:text-3xl w-[50%]">
                         Mobile Number
                       </p>
-                      <p className="text-2xl md:text-3xl flex-1 pl-4">
+                      <p className="text-2xl md:text-3xl flex-1 pl-4 w-[50%]">
                         {user?.mobileNumber}
                       </p>
                     </li>
                     <li className="md:flex items-center w-full px-4 py-2">
-                      <p className="text-2xl md:text-3xl w-full">gender</p>
-                      <p className="text-2xl md:text-3xl flex-1 pl-4">
+                      <p className="text-2xl md:text-3xl  w-[50%]">
+                        gender
+                      </p>
+                      <p className="text-2xl md:text-3xl flex-1 pl-4 w-[50%]">
                         {/* {user?.gender ? {user?.gender} : "please login"} */}
                         {user?.gender || "please update profile"}
                       </p>
