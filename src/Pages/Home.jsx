@@ -6,7 +6,7 @@ import Offerbar from '../Components/Offerbar'
 import Reviews from '../Components/Reviews'
 import Topsales from '../Components/Topsales'
 import TopUpButton from '../Components/TopupButton'
-// import Dummy from '../Components/Dummy'
+import Dummy from '../Components/Dummy'
 const Home = () => {
   return (
     <div>
@@ -17,7 +17,7 @@ const Home = () => {
       <Offerbar />
       <Reviews />
       <TopUpButton />
-      {/* <Dummy /> */}
+      <Dummy />
       {/* <Footer /> */}
     </div>
   );

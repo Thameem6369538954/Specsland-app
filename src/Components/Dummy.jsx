@@ -1,202 +1,73 @@
+import React, { useState } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 
-function ProductForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    price: "",
-    description: "",
-    mainImage: "",
-    subImage: "",
-    category: "",
-  });
-  const [errors, setErrors] = useState({});
+const Dummy = () => {
+  const [profileImage, setProfileImage] = useState(null);
 
-  // Validation function
-  const validate = () => {
-    const newErrors = {};
+  // Fetch userId from localStorage
+  const userData = localStorage.getItem("user");
+  let userId = null;
 
-    if (!formData.name) newErrors.name = "Product Name is required.";
-    if (!formData.price || isNaN(formData.price))
-      newErrors.price = "Valid price is required.";
-    if (!formData.description)
-      newErrors.description = "Description is required.";
-    if (!formData.mainImage)
-      newErrors.mainImage = "Main Image URL is required.";
-    if (!formData.subImage) newErrors.subImage = "Sub Image URL is required.";
-    if (!formData.category) newErrors.category = "Category is required.";
+  if (userData) {
+    const parsedUserData = JSON.parse(userData);
+    userId = parsedUserData._id;
+    console.log(userId, "User ID retrieved successfully");
+  } else {
+    console.error("No user data found in localStorage");
+  }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  // Handle image selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setProfileImage(file); // Set file in state
   };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
+  // Handle file upload
+  const handleFileUpload = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      try {
-        const response = await axios.post(
-          "https://specsland-backend.onrender.com/api/v1/products",
-          formData
-        );
-        console.log("Form submitted successfully:", response.data);
-      } catch (error) {
-        console.error("Request failed:", error);
-      }
+
+    if (!profileImage) {
+      console.error("No file selected for upload");
+      return;
     }
-  };
 
-  // Handle input change
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
-  };
-const [data, setData] = useState(null);
+    if (!userId) {
+      console.error("User ID not found");
+      return;
+    }
 
-useEffect(() => {
-  const fetchData = async () => {
+    const formData = new FormData();
+    formData.append("file", profileImage);
+
     try {
-      const res = await axios.get(
-        "https://specsland-backend.onrender.com/api/v1/products"
+      const response = await axios.put(
+        `https://specsland-backend.onrender.com/api/v1/profileUpdate/${userId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            // Include Authorization if required
+            // Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      setData(res.data); // Make sure to use res.data if your data is in the `data` property of the response
-      console.log(res.data);
-      
+      console.log(response.data, "File uploaded successfully");
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error uploading file:", error);
     }
   };
-
-  fetchData();
-}, []);
-   
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="name"
-        >
-          Product Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Product Name"
-        />
-        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
-      </div>
-
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="price"
-        >
-          Price
-        </label>
-        <input
-          type="number"
-          id="price"
-          value={formData.price}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Price"
-        />
-        {errors.price && <p className="text-red-500 text-sm">{errors.price}</p>}
-      </div>
-
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="description"
-        >
-          Description
-        </label>
-        <input
-          type="text"
-          id="description"
-          value={formData.description}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Description"
-        />
-        {errors.description && (
-          <p className="text-red-500 text-sm">{errors.description}</p>
-        )}
-      </div>
-
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="mainImage"
-        >
-          Main Image
-        </label>
-        <input
-          type="text"
-          id="mainImage"
-          value={formData.mainImage}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Main Image URL"
-        />
-        {errors.mainImage && (
-          <p className="text-red-500 text-sm">{errors.mainImage}</p>
-        )}
-      </div>
-
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="subImage"
-        >
-          Sub Image
-        </label>
-        <input
-          type="text"
-          id="subImage"
-          value={formData.subImage}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Sub Image URL"
-        />
-        {errors.subImage && (
-          <p className="text-red-500 text-sm">{errors.subImage}</p>
-        )}
-      </div>
-
-      <div className="mb-4">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="category"
-        >
-          Category
-        </label>
-        <input
-          type="text"
-          id="category"
-          value={formData.category}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Category"
-        />
-        {errors.category && (
-          <p className="text-red-500 text-sm">{errors.category}</p>
-        )}
-      </div>
-
-      <button
-        type="submit"
-        className="w-full px-9 py-2 bg-black text-white rounded-xl hover:bg-gray-800"
-      >
-        Submit
-      </button>
+    <form onSubmit={handleFileUpload}>
+      <input
+        type="file"
+        onChange={handleImageChange}
+        id="file"
+        accept="image/*"
+      />
+      <button type="submit">Update</button>
     </form>
   );
-}
+};
 
-export default ProductForm;
+export default Dummy;

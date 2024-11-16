@@ -12,6 +12,7 @@ import profileFemale from "../Images/profileFemale.jpg";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const UserProfile = () => {
+
   const { user, token } = useSelector((state) => state.auth);
   const isAuthenticated = user && token;
   const [editform, setEditForm] = useState(false);
@@ -59,6 +60,14 @@ const UserProfile = () => {
     mobileNumber: "",
     gender: "",
   });
+
+  const [profileImage, setProfileImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setProfileImage(file);
+  };
+
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -152,6 +161,10 @@ const UserProfile = () => {
       console.error("Error during profile update:", error);
     }
   };
+
+
+
+  
   return (
     <>
       {isAuthenticated ? (
