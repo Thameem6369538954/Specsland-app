@@ -12,10 +12,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "../Css/Caro.css"; // Make sure this file contains the styles above
+import LazyLoad from "react-lazyload";
 
 export default () => {
+  
   return (
     <div className="min-h-[0vh]">
+          <LazyLoad height={200} offset={100}>
+        
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={50}
@@ -63,10 +67,12 @@ export default () => {
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",
+              
             }}
           ></div>
         </SwiperSlide>
       </Swiper>
+      </LazyLoad>
     </div>
   );
 };

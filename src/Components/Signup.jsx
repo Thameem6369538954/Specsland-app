@@ -142,7 +142,7 @@ const validate = () => {
 
     try {
       const res = await axios.post(
-        "https://specsland-backend.onrender.com/api/v1/userRegister",
+        "https://specsland-backend-app-newone.onrender.com/api/v1/userRegister",
         data, // Sending form data here
         {
           headers: {

@@ -24,7 +24,7 @@ const UserProfile = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "https://specsland-backend.onrender.com/api/v1/logout",
+        "https://specsland-backend-app-newone.onrender.com/api/v1/logout",
         {},
         {
           headers: { "Content-Type": "application/json" },
@@ -132,7 +132,7 @@ const UserProfile = () => {
       }
 
       const response = await axios.put(
-        `https://specsland-backend.onrender.com/api/v1/update/${userId}`,
+        `https://specsland-backend-app-newone.onrender.com/api/v1/update/${userId}`,
         formData
       );
 

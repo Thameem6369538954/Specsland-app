@@ -60,8 +60,8 @@ const Login = () => {
    e.preventDefault();
    try {
      const res = await axios.post(
-       "https://specsland-backend.onrender.com/api/v1/login",
-       data,
+       "https://specsland-backend-app-newone.onrender.com/api/v1/login",
+       data,  
        { headers: { "Content-Type": "application/json" } }
      );
 

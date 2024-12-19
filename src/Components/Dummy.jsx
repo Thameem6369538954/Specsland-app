@@ -41,7 +41,7 @@ const Dummy = () => {
 
     try {
       const response = await axios.put(
-        `https://specsland-backend.onrender.com/api/v1/profileUpdate/${userId}`,
+        `https://specsland-backend-app-newone.onrender.com/api/v1/profileUpdate/${userId}`,
         formData,
         {
           headers: {
