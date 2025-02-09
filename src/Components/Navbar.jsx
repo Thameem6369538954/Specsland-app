@@ -32,7 +32,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
      const response = await axios.post(
-       "https://specsland-backend.onrender.com/api/v1/logout",
+       "https://specsland-backend-app-newone.onrender.com/api/v1/logout",
        {}, // Empty object for data since there's no body content needed for logout
        {
          headers: { "Content-Type": "application/json" },
@@ -42,7 +42,6 @@ const Navbar = () => {
       if (response.status === 200) {
         // Clear any stored user data or token in localStorage or Redux
         localStorage.removeItem("token"); // Example: Clear token in local storage
-        // Redirect user to the login page or show a message
         toast.success(response.data.message);
 
         setTimeout(() => {    

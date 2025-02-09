@@ -49,7 +49,8 @@ const Dummy = () => {
             // Include Authorization if required
             // Authorization: `Bearer ${token}`,
           },
-        }
+        },
+        { withCredentials: true } 
       );
       console.log(response.data, "File uploaded successfully");
     } catch (error) {
